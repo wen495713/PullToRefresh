@@ -23,7 +23,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [items count];
+    return [items count]+20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -34,7 +34,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 
-    cell.textLabel.text = [items objectAtIndex:indexPath.row];
+//    cell.textLabel.text = [items objectAtIndex:indexPath.row];
+    cell.textLabel.text = @"test";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
@@ -42,6 +43,11 @@
 
 - (void)refresh {
     [self performSelector:@selector(addItem) withObject:nil afterDelay:2.0];
+}
+
+- (void)headerReflash{
+    [self performSelector:@selector(addItem) withObject:nil afterDelay:2.0];
+    [super headerReflash];
 }
 
 - (void)addItem {
@@ -52,8 +58,6 @@
     [items insertObject:[NSString stringWithFormat:@"%@", now] atIndex:0];
 
     [self.tableView reloadData];
-
-    [self stopLoading];
 }
 
 - (void)dealloc {

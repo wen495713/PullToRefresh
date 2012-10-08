@@ -28,32 +28,53 @@
 //
 
 #import <UIKit/UIKit.h>
+@interface PullRefreshHeaderView : UIView{
+    UILabel *textLabel;
+    UIImageView *arrow;
+    UIActivityIndicatorView *spinner;
+}
+@property (nonatomic, retain) NSString *normalText;
+@property (nonatomic, retain) NSString *releaseText;
+@property (nonatomic, retain) NSString *loadingText;
+@property (nonatomic, retain) UILabel *textLabel;
+@property (nonatomic, retain) UIImage *arrowImage;
+@property (nonatomic, assign) BOOL loading;
+- (void)turnArrowUp:(BOOL)animate;
+- (void)turnArrowDown:(BOOL)animate;
+@end
 
 
 @interface PullRefreshTableViewController : UITableViewController {
-    UIView *refreshHeaderView;
-    UILabel *refreshLabel;
-    UIImageView *refreshArrow;
-    UIActivityIndicatorView *refreshSpinner;
+    
     BOOL isDragging;
     BOOL isLoading;
-    NSString *textPull;
-    NSString *textRelease;
-    NSString *textLoading;
+    PullRefreshHeaderView *header;
+    PullRefreshHeaderView *footer;
+//    UIView *refreshHeaderView;
+//    UILabel *refreshLabel;
+//    UIImageView *refreshArrow;
+//    UIActivityIndicatorView *refreshSpinner;
+//    NSString *textPull;
+//    NSString *textRelease;
+//    NSString *textLoading;
 }
 
-@property (nonatomic, retain) UIView *refreshHeaderView;
-@property (nonatomic, retain) UILabel *refreshLabel;
-@property (nonatomic, retain) UIImageView *refreshArrow;
-@property (nonatomic, retain) UIActivityIndicatorView *refreshSpinner;
-@property (nonatomic, copy) NSString *textPull;
-@property (nonatomic, copy) NSString *textRelease;
-@property (nonatomic, copy) NSString *textLoading;
+//@property (nonatomic, retain) UIView *refreshHeaderView;
+//@property (nonatomic, retain) UILabel *refreshLabel;
+//@property (nonatomic, retain) UIImageView *refreshArrow;
+//@property (nonatomic, retain) UIActivityIndicatorView *refreshSpinner;
+//@property (nonatomic, copy) NSString *textPull;
+//@property (nonatomic, copy) NSString *textRelease;
+//@property (nonatomic, copy) NSString *textLoading;
 
-- (void)setupStrings;
-- (void)addPullToRefreshHeader;
-- (void)startLoading;
-- (void)stopLoading;
-- (void)refresh;
+//- (void)setupStrings;
+//- (void)addPullToRefreshHeader;
+//- (void)startLoading;
+//- (void)stopLoading;
+//- (void)refresh;
+//- (void)getMore;
 
+- (void)headerReflash;//重载方法
+- (void)footerForMore;//重载方法
+- (void)stopHeaderLoading;//下拉刷新停止方法
 @end
